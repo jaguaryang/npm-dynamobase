@@ -2,6 +2,12 @@
   "name": "dynamobase",
   "version": "1.0.0",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaguaryang/npm-dynamobase"
+  },
+  "homepage": "https://github.com/jaguaryang/npm-dynamobase",
+  "bugs": "https://github.com/jaguaryang/npm-dynamobase/issues",
   "main": "dynamo-base.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
