@@ -1,6 +1,6 @@
 {
   "name": "dynamobase",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "keywords": [
     "dynamodb",
     "mongodb"
