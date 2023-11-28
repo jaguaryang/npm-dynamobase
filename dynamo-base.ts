@@ -2,12 +2,25 @@ import 'server-only'
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand, QueryCommand, ScanCommand, DeleteCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
-const client = new DynamoDBClient({ region: "us-east-1" });
-const dynamodb = DynamoDBDocumentClient.from(client);
+class DynamoDB {
+  private static _instance: DynamoDB;
+  private constructor() { }
+  public static get Instance() {
+    return this._instance || (this._instance = new this());
+  }
+
+  public dynamodb;
+  public config = (options) => {
+    const client = new DynamoDBClient(options);
+    this.dynamodb = DynamoDBDocumentClient.from(client);
+  }
+}
+
+export const dynamobase_config = (options) => DynamoDB.Instance.config(options)
 
 export const get_item = async (params) => {
   const command = new GetCommand({ TableName: params["TableName"], Key: params["query"] });
-  const result = await dynamodb.send(command);
+  const result = await DynamoDB.Instance.dynamodb.send(command);
   return result ? result.Item : null;
 };
 
@@ -56,7 +69,7 @@ export const get_items = async (params) => {
   // console.log(options);
 
   const command = "query" in params ? new QueryCommand(options) : new ScanCommand(options);
-  const results = await dynamodb.send(command);
+  const results = await DynamoDB.Instance.dynamodb.send(command);
   return results ? results.Items : null;
 };
 
@@ -68,7 +81,7 @@ export const get_first = async (params) => {
 
 export const put_item = async (params) => {
   const command = new PutCommand({ TableName: params["TableName"], Item: params["Item"] });
-  return await dynamodb.send(command);
+  return await DynamoDB.Instance.dynamodb.send(command);
 };
 
 export const update_item = async (params) => {
@@ -80,12 +93,12 @@ export const update_item = async (params) => {
     ExpressionAttributeNames: exp["ExpressionAttributeNames"],
     ExpressionAttributeValues: exp["ExpressionAttributeValues"],
   };
-  await dynamodb.send(new UpdateCommand(options));
+  await DynamoDB.Instance.dynamodb.send(new UpdateCommand(options));
 };
 
 export const delete_item = async (params) => {
   const command = new DeleteCommand({ TableName: params["TableName"], Key: params["query"] });
-  return await dynamodb.send(command);
+  return await DynamoDB.Instance.dynamodb.send(command);
 };
 
 const _KeyConditionExpression = (dct) => {
