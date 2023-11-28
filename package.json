@@ -1,0 +1,15 @@
+{
+  "name": "dynamobase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dynamo-base.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jack Yang",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.427.0",
+    "@aws-sdk/lib-dynamodb": "^3.427.0"
+  }
+}
