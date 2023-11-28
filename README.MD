@@ -26,6 +26,7 @@ yarn add dynamobase
 # Configuration
 
 ```
+import { dynamobase_config } from "dynamobase";
 dynamobase_config({ region: "us-east-1" })
 ```
 
