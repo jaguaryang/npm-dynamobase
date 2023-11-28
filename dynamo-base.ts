@@ -70,13 +70,13 @@ export const get_items = async (params) => {
 
   const command = "query" in params ? new QueryCommand(options) : new ScanCommand(options);
   const results = await DynamoDB.Instance.dynamodb.send(command);
-  return results ? results.Items : null;
+  return results;
 };
 
 export const get_first = async (params) => {
   params['Limit'] = 1
-  const items = await get_items(params);
-  return items!.length ? items![0] : null;
+  const resp = await get_items(params);
+  return resp.Items.length ? resp.Items[0] : null;
 };
 
 export const put_item = async (params) => {
