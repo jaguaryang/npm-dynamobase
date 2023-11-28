@@ -23,6 +23,12 @@ npm i dynamobase
 yarn add dynamobase
 ```
 
+# Configuration
+
+```
+dynamobase_config({ region: "us-east-1" })
+```
+
 # Use
 
 ## Basic try
