@@ -1,7 +1,10 @@
 {
   "name": "dynamobase",
-  "version": "1.0.1",
-  "keywords": ["dynamodb", "mongodb"],
+  "version": "1.0.2",
+  "keywords": [
+    "dynamodb",
+    "mongodb"
+  ],
   "description": "",
   "repository": {
     "type": "git",
